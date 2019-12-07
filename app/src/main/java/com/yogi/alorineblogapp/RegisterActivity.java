@@ -3,6 +3,7 @@ package com.yogi.alorineblogapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -22,6 +23,8 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.yogi.alorineblogapp.util.UserAPI;
+import com.yogi.alorineblogapp.util.UserAPI;
 
 import java.util.Objects;
 
@@ -101,9 +104,9 @@ public class RegisterActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 firebaseUser = firebaseAuth.getCurrentUser();
                                 assert firebaseUser != null;
-                                String currentUserId = firebaseUser.getUid();
+                                final String currentUserId = firebaseUser.getUid();
 
-                                User user = new User(currentUserId, username, phone);
+                                UserAPI user = new UserAPI(currentUserId, username, phone);
 
                                 collectionReference.add(user)
                                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -112,9 +115,23 @@ public class RegisterActivity extends AppCompatActivity {
                                                 documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                        if(Objects.requireNonNull(task.getResult()).exists()) {
+                                                        if (Objects.requireNonNull(task.getResult()).exists()) {
                                                             progressBar.setVisibility(View.INVISIBLE);
                                                             Toast.makeText(RegisterActivity.this, "Account Successfully Created!", Toast.LENGTH_SHORT).show();
+
+                                                            String username = task.getResult().getString("username");
+                                                            String phone = task.getResult().getString("phone");
+
+                                                            UserAPI userAPI = UserAPI.getInstance();
+                                                            userAPI.setUserId(currentUserId);
+                                                            userAPI.setUserame(username);
+                                                            userAPI.setPhone(phone);
+
+                                                            Intent intent = new Intent(RegisterActivity.this, BlogActivity.class);
+                                                            intent.putExtra("username", username);
+                                                            intent.putExtra("userId", currentUserId);
+                                                            intent.putExtra("phone", phone);
+                                                            startActivity(intent);
                                                         } else {
                                                             Toast.makeText(RegisterActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
                                                         }

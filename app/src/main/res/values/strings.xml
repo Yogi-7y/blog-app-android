@@ -7,4 +7,6 @@
     <string name="username">Username</string>
     <string name="phone_number">Phone Number</string>
     <string name="create_account">Create Account</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
 </resources>
