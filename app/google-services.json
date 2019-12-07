@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "440703220004",
+    "firebase_url": "https://alorineblogapp.firebaseio.com",
+    "project_id": "alorineblogapp",
+    "storage_bucket": "alorineblogapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440703220004:android:06160e3bb8131c9efd9bb1",
+        "android_client_info": {
+          "package_name": "com.yogi.alorineblogapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "440703220004-1t1slmh1rva9ji72n79f7nso3bvuqrmq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yogi.alorineblogapp",
+            "certificate_hash": "8cad7e4332c36c61e08b047e798e2032bc4a8d33"
+          }
+        },
+        {
+          "client_id": "440703220004-d9ik7cqus25p5s6kpmf5fln6qa1k1sul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVgmMN-3m6EIt_xL6dhcxYh-ZFJynV71U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "440703220004-d9ik7cqus25p5s6kpmf5fln6qa1k1sul.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

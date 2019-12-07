@@ -4,15 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/splash_screen_activity"
-        app:lottie_loop="true"
-        app:lottie_fileName="book-animation.json"
-        app:lottie_autoPlay="true" />
-
+    tools:context=".HomeActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
