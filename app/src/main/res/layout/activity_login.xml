@@ -7,6 +7,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="16dp"
+    android:background="@drawable/green_gradient"
     tools:context=".LoginActivity">
 
     <ProgressBar
@@ -33,6 +34,9 @@
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
+
+
+
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -49,7 +53,7 @@
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:layout_marginTop="16dp"
+
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -69,6 +73,7 @@
             android:layout_height="wrap_content"
             android:text="@string/or"
             android:textSize="18sp"
+
             android:gravity="center_horizontal" />
 
         <Button

@@ -1,8 +1,8 @@
-package com.yogi.alorineblogapp.util;
+package com.yogi.alorineblogapp.model;
 
 import android.app.Application;
 
-public class UserAPI extends Application{
+public class UserAPI extends Application {
 
     private String userId;
     private String username;
@@ -16,12 +16,7 @@ public class UserAPI extends Application{
         return instance;
     }
 
-    public UserAPI() {}
-
-    public UserAPI(String userId, String username, String phone) {
-        this.userId = userId;
-        this.username = username;
-        this.phone = phone;
+    public UserAPI() {
     }
 
     public String getUserId() {
@@ -32,11 +27,11 @@ public class UserAPI extends Application{
         this.userId = userId;
     }
 
-    public String getUserame() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUserame(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -46,5 +41,9 @@ public class UserAPI extends Application{
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public static void setInstance(UserAPI instance) {
+        UserAPI.instance = instance;
     }
 }

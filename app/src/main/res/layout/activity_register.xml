@@ -7,6 +7,7 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:gravity="center"
+    android:background="@drawable/green_gradient"
     tools:context=".RegisterActivity">
 
     <ProgressBar
@@ -45,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
-                android:inputType="textPassword"
+                android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:layout_marginTop="16dp"
                 />
