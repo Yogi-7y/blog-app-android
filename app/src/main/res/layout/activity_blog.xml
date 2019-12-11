@@ -1,25 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+
+        android:src="@drawable/pic"/>
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="4dp"
-    android:background="@drawable/green_gradient"
+
     tools:context=".BlogActivity">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.5">
 
+
+
+
         <ImageView
             android:id="@+id/background_image_blog"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/addblog" />
+            android:scaleType="centerCrop" />
 
         <ImageView
             android:id="@+id/background_image_icon_blog"
@@ -36,6 +49,10 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.9dp"
+        android:background="@color/white"/>
 
 
     <LinearLayout
@@ -49,13 +66,19 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/white"
             android:id="@+id/title_blog">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/title"
+                android:backgroundTint="@color/white"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
                 android:maxLines="1"
+                android:fontFamily="sans-serif"
                 android:layout_marginTop="16dp"
                 />
 
@@ -66,16 +89,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
-            app:counterMaxLength="180"
+            app:counterMaxLength="1000"
             app:counterEnabled="true"
+            app:counterTextAppearance="@style/hintAppearance"
+            android:textColorHint="@color/white"
             android:id="@+id/description_blog">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/description"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"
                 android:layout_marginTop="16dp"
-                />
+                android:fontFamily="sans-serif"
+                android:cursorVisible="true"
+                android:hint="@string/description"
+                android:selectAllOnFocus="false"
+                android:singleLine="false"
+                android:textAlignment="center"
+                android:visibility="visible"
+                tools:visibility="visible" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -83,12 +116,22 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.9dp"
+        android:background="@color/white"/>
+
     <Button
         android:id="@+id/post_button_blog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/post"
-        android:textColor="@color/colorAccent" />
+        android:fontFamily="sans-serif"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:background="@android:color/transparent"
+        android:textColor="@color/white" />
 
 
 </LinearLayout>
+</FrameLayout>

@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/pic"/>
+
+<LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,9 +17,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="16dp"
-    android:background="@drawable/green_gradient"
     tools:context=".LoginActivity">
-
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,6 +34,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/white"
             android:id="@+id/email_text_input_layout">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -34,9 +44,8 @@
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
-
-
-
+                android:backgroundTint="@color/white"
+                android:textColor="@color/white"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -45,12 +54,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:passwordToggleEnabled="true"
+            android:textColorHint="@color/white"
+            app:passwordToggleTint="@color/white"
             android:id="@+id/password_text_input_layout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/white"
                 android:inputType="textPassword"
                 android:maxLines="1"
 
@@ -62,10 +75,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/login_button"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/white"
             android:text="@string/login"
             android:background="@android:color/transparent"
             android:layout_marginTop="16dp"
+
             android:textStyle="bold" />
 
         <TextView
@@ -73,14 +87,14 @@
             android:layout_height="wrap_content"
             android:text="@string/or"
             android:textSize="18sp"
-
+            android:textColor="@color/white"
             android:gravity="center_horizontal" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/register_button_login"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/white"
             android:text="@string/create_account"
             android:background="@android:color/transparent"
             android:textStyle="bold" />
@@ -89,3 +103,5 @@
     </LinearLayout>
 
 </LinearLayout>
+
+</FrameLayout>

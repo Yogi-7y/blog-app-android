@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -66,6 +67,7 @@ public class BlogActivity extends AppCompatActivity implements View.OnClickListe
 //        } else {
 //            Log.d(TAG, "onCreate: Bundle is null");
 //        }
+
 
         firebaseAuth = FirebaseAuth.getInstance();
 

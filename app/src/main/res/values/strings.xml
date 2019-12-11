@@ -10,4 +10,6 @@
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="post">POST</string>
+    <string name="add_blog">Add Blog</string>
+    <string name="sign_out">Sign Out</string>
 </resources>

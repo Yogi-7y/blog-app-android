@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/pic"/>
+<LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,7 +16,6 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:gravity="center"
-    android:background="@drawable/green_gradient"
     tools:context=".RegisterActivity">
 
     <ProgressBar
@@ -26,12 +34,17 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/white"
+
             android:id="@+id/username_register">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/username"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"
                 android:maxLines="1"
                 />
 
@@ -40,12 +53,15 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/white"
             android:id="@+id/email_register">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:layout_marginTop="16dp"
@@ -57,12 +73,15 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/white"
             android:id="@+id/phone_register">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
                 android:hint="@string/phone_number"
+                android:textColor="@color/white"
                 android:inputType="phone"
                 android:maxLines="1"
                 android:layout_marginTop="16dp"
@@ -75,6 +94,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:passwordToggleEnabled="true"
+            android:textColorHint="@color/white"
+            app:passwordToggleTint="@color/white"
             android:id="@+id/password_register">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -83,6 +104,8 @@
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:maxLines="1"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"
                 android:layout_marginTop="16dp"
                 />
 
@@ -92,8 +115,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/register_button_register"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/white"
             android:text="@string/create_account"
+
             android:background="@android:color/transparent"
             android:layout_marginTop="16dp"
             android:textStyle="bold" />
@@ -103,3 +127,5 @@
     </LinearLayout>
 
 </LinearLayout>
+
+</FrameLayout>
