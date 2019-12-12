@@ -12,4 +12,24 @@
     <string name="post">POST</string>
     <string name="add_blog">Add Blog</string>
     <string name="sign_out">Sign Out</string>
+    <string name="categories_str">Select Categories</string>
+
+    <string-array name="categories">
+        <item>Finance</item>
+        <item>Diet</item>
+        <item>Skincare</item>
+        <item>Society</item>
+        <item>Fitness</item>
+        <item>Relationship</item>
+        <item>Travel</item>
+        <item>DIY</item>
+        <item>Inspiration</item>
+        <item>Food</item>
+        <item>Humour</item>
+        <item>Political</item>
+        <item>Psychology</item>
+        <item>Leadership</item>
+        <item>Marketing</item>
+
+    </string-array>
 </resources>

@@ -10,16 +10,34 @@ public class Blog {
     private String userId;
     private Timestamp timestamp;
     private String username;
+    private String category;
 
     public Blog() {}
 
-    public Blog(String title, String description, String imageUri, String userId, Timestamp timestamp, String username) {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public Blog(String title, String description, String imageUri, String userId, Timestamp timestamp, String username, String category ) {
         this.title = title;
         this.description = description;
         this.imageUri = imageUri;
         this.userId = userId;
         this.timestamp = timestamp;
         this.username = username;
+        this.category = category;
     }
 
     public String getTitle() {

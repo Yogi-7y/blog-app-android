@@ -11,13 +11,17 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.common.primitives.Chars;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,6 +36,7 @@ import com.yogi.alorineblogapp.model.User;
 import com.yogi.alorineblogapp.model.UserAPI;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class BlogActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -40,6 +45,9 @@ public class BlogActivity extends AppCompatActivity implements View.OnClickListe
     private Button postButton;
     private TextInputLayout titleEditText, descriptionEditText;
     private ImageView addImage, backgroundImage;
+    private Spinner categorySpinner;
+    private ArrayAdapter<CharSequence> adapter;
+    String selectedCategory;
 
     private String currentUserId, currentUsername;
     private FirebaseAuth firebaseAuth;
@@ -77,9 +85,30 @@ public class BlogActivity extends AppCompatActivity implements View.OnClickListe
         descriptionEditText = findViewById(R.id.description_blog);
         addImage = findViewById(R.id.background_image_icon_blog);
         backgroundImage = findViewById(R.id.background_image_blog);
+        categorySpinner = findViewById(R.id.spinner);
 
         postButton.setOnClickListener(this);
         addImage.setOnClickListener(this);
+
+        adapter = ArrayAdapter.createFromResource(this, R.array.categories, R.layout.spinner_text_layout);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        categorySpinner.setAdapter(adapter);
+
+
+        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedCategory = parent.getItemAtPosition(position).toString();
+                Log.d(TAG, "onItemSelected: " + selectedCategory);
+                Toast.makeText(BlogActivity.this, "" + selectedCategory, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         if (UserAPI.getInstance() != null) {
             currentUserId = UserAPI.getInstance().getUserId();
@@ -120,8 +149,8 @@ public class BlogActivity extends AppCompatActivity implements View.OnClickListe
 
     private void saveJournal() {
 
-        final String title = titleEditText.getEditText().getText().toString().trim();
-        final String description = descriptionEditText.getEditText().getText().toString().trim();
+        final String title = Objects.requireNonNull(titleEditText.getEditText()).getText().toString().trim();
+        final String description = Objects.requireNonNull(descriptionEditText.getEditText()).getText().toString().trim();
 
         if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(description) && imageURI != null) {
             final StorageReference filePath = storageReference
@@ -138,8 +167,8 @@ public class BlogActivity extends AppCompatActivity implements View.OnClickListe
                                 public void onSuccess(Uri uri) {
                                     String imageUrl = imageURI.toString();
                                     Blog blog = new Blog(title, description, imageUrl,
-                                            currentUserId, new Timestamp(new Date()), currentUsername);
-
+                                            currentUserId, new Timestamp(new Date()), currentUsername, selectedCategory);
+                                    Log.d(TAG, "onSuccess: Selected Category" + selectedCategory);
                                     collectionReference.add(blog)
                                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                                 @Override

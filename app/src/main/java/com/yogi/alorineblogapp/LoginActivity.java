@@ -88,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                                 FirebaseUser user = firebaseAuth.getCurrentUser();
                                 assert user != null;
                                 final String currentUserId = user.getUid();
+                                Toast.makeText(LoginActivity.this, " User logged in..", Toast.LENGTH_SHORT).show();
 
                                 collectionReference
                                         .whereEqualTo("userId", currentUserId)

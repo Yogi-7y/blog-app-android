@@ -9,10 +9,11 @@
     <include
         android:id="@+id/toolbar_home"
         layout="@layout/toolbar" />
-    <TextView
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_home"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Home Screen" />
+        android:layout_height="match_parent" />
 
 </RelativeLayout>
