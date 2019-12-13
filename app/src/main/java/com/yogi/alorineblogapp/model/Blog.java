@@ -48,13 +48,13 @@ public class Blog {
         this.title = title;
     }
 
-    public String getDecsription() {
-        return description;
-    }
-
-    public void setDecsription(String description) {
-        this.description = description;
-    }
+//    public String getDecsription() {
+//        return description;
+//    }
+//
+//    public void setDecsription(String description) {
+//        this.description = description;
+//    }
 
     public String getImageUri() {
         return imageUri;

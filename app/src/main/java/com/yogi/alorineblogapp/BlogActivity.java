@@ -162,10 +162,29 @@ public class BlogActivity extends AppCompatActivity implements View.OnClickListe
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
+//                            Toast.makeText(BlogActivity.this, "Upload Successful", Toast.LENGTH_SHORT).show();
+//
+//                            Blog blog = new Blog(title, description, taskSnapshot.getUploadSessionUri().toString(), currentUserId,
+//                                    new Timestamp(new Date()), currentUsername, selectedCategory);
+//
+//                            collectionReference.add(blog)
+//                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                                        @Override
+//                                        public void onSuccess(DocumentReference documentReference) {
+//                                            Toast.makeText(BlogActivity.this, "Data Successfully Added", Toast.LENGTH_SHORT).show();
+//                                        }
+//                                    })
+//                                    .addOnFailureListener(new OnFailureListener() {
+//                                        @Override
+//                                        public void onFailure(@NonNull Exception e) {
+//                                            Toast.makeText(BlogActivity.this, "OnFailuer Occured", Toast.LENGTH_SHORT).show();
+//                                        }
+//                                    });
+
                             filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    String imageUrl = imageURI.toString();
+                                    String imageUrl = uri.toString();
                                     Blog blog = new Blog(title, description, imageUrl,
                                             currentUserId, new Timestamp(new Date()), currentUsername, selectedCategory);
                                     Log.d(TAG, "onSuccess: Selected Category" + selectedCategory);
