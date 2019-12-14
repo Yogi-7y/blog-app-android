@@ -18,9 +18,9 @@ public class BlogDetailActivity extends AppCompatActivity {
     private static final String TAG = BlogDetailActivity.class.getSimpleName();
     private Blog blog;
     private ImageView blogImageView;
-    private TextView titleTextView, nameTextView, timeStampTextView, descriptionTextView;
+    private TextView titleTextView, nameTextView, timeStampTextView, descriptionTextView, categoryTextView;
 
-    String title, timeStamp, username, description, image;
+    String title, timeStamp, username, description, image, category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +34,20 @@ public class BlogDetailActivity extends AppCompatActivity {
         timeStamp = intent.getStringExtra("timeStamp");
         title = intent.getStringExtra("title");
         username = intent.getStringExtra("username");
+        category = intent.getStringExtra("category");
 
         nameTextView = findViewById(R.id.name_blog_detail);
         titleTextView = findViewById(R.id.title_blog_detail);
         descriptionTextView = findViewById(R.id.description_blog_detail);
         timeStampTextView = findViewById(R.id.time_stamp_blog_detail);
         blogImageView = findViewById(R.id.image_blog_detail);
+        categoryTextView = findViewById(R.id.blog_category_detail);
 
         nameTextView.setText(username);
         titleTextView.setText(title);
         descriptionTextView.setText(description);
         timeStampTextView.setText(timeStamp);
+        categoryTextView.setText(category);
 
         Glide.with(getApplicationContext())
                 .load(image)

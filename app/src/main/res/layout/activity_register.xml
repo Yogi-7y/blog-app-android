@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:textColorHint="@color/white"
             android:backgroundTint="@color/white"
-
+            app:errorEnabled="true"
             android:id="@+id/username_register">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -54,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/white"
+            app:errorEnabled="true"
             android:id="@+id/email_register">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -74,6 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/white"
+            app:errorEnabled="true"
             android:id="@+id/phone_register">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -96,6 +98,7 @@
             app:passwordToggleEnabled="true"
             android:textColorHint="@color/white"
             app:passwordToggleTint="@color/white"
+            app:errorEnabled="true"
             android:id="@+id/password_register">
 
             <com.google.android.material.textfield.TextInputEditText

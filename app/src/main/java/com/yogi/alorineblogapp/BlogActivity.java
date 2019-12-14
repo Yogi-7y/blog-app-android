@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -134,7 +135,6 @@ public class BlogActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.post_button_blog:
-                Toast.makeText(this, "Uploading...", Toast.LENGTH_LONG).show();
                 saveJournal();
                 break;
 
@@ -152,7 +152,8 @@ public class BlogActivity extends AppCompatActivity implements View.OnClickListe
         final String title = Objects.requireNonNull(titleEditText.getEditText()).getText().toString().trim();
         final String description = Objects.requireNonNull(descriptionEditText.getEditText()).getText().toString().trim();
 
-        if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(description) && imageURI != null) {
+        if (validateTitle() & validateDescription() & imageURI != null) {
+            Toast.makeText(this, "Uploading...", Toast.LENGTH_LONG).show();
             final StorageReference filePath = storageReference
                     .child("blog_images")
                     .child("my_image" + Timestamp.now().getSeconds());
@@ -246,6 +247,35 @@ public class BlogActivity extends AppCompatActivity implements View.OnClickListe
 
         if (firebaseAuth != null) {
             firebaseAuth.removeAuthStateListener(authStateListener);
+        }
+    }
+
+    private boolean validateTitle() {
+
+        String titleInput = Objects.requireNonNull(titleEditText.getEditText()).getText().toString().trim();
+
+        if (titleInput.isEmpty()) {
+            titleEditText.setError("Field can't be empty");
+            return false;
+        } else {
+            titleEditText.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validateDescription() {
+
+        String descriptionInput = Objects.requireNonNull(descriptionEditText.getEditText()).getText().toString().trim();
+        Log.d(TAG, "validateDescription: length " + descriptionInput.length());
+        if (descriptionInput.isEmpty()) {
+            descriptionEditText.setError("Field can't be empty");
+            return false;
+        } else if (descriptionInput.length() > 10) {
+            descriptionEditText.setError("Max limit is 1000 characters");
+            return false;
+        } else {
+            descriptionEditText.setError(null);
+            return true;
         }
     }
 }

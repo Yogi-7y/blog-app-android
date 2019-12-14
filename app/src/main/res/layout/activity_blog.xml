@@ -15,7 +15,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="4dp"
-
     tools:context=".BlogActivity">
 
 
@@ -23,8 +22,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.5">
-
-
 
 
         <ImageView
@@ -67,6 +64,7 @@
             android:layout_height="wrap_content"
             android:textColorHint="@color/white"
             android:backgroundTint="@color/white"
+            app:errorEnabled="true"
             android:id="@+id/title_blog">
 
             <com.google.android.material.textfield.TextInputEditText

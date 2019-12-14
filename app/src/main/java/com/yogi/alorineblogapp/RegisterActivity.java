@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -29,6 +30,7 @@ import com.yogi.alorineblogapp.model.UserAPI;
 
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -43,6 +45,17 @@ public class RegisterActivity extends AppCompatActivity {
 
     private TextInputLayout emailEditText, passwordEditText, phoneEditText, usernameEditText;
     private ProgressBar progressBar;
+
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    "(?=.*[0-9])" +         //at least 1 digit
+                    //"(?=.*[a-z])" +         //at least 1 lower case letter
+                    //"(?=.*[A-Z])" +         //at least 1 upper case letter
+                    "(?=.*[a-zA-Z])" +      //any letter
+                    //"(?=.*[@#$%^&+=])" +    //at least 1 special character
+                    "(?=\\S+$)" +           //no white spaces
+                    ".{6,}" +               //at least 4 characters
+                    "$");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,8 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void createUserAccount(String email, String password, final String username, final String phone) {
-        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)
-                && !TextUtils.isEmpty(username) && !TextUtils.isEmpty(phone)) {
+        if (validateEmail() & validatePassword() & validateUsername()) {
 
             progressBar.setVisibility(View.VISIBLE);
 
@@ -136,6 +148,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                                     progressBar.setVisibility(View.INVISIBLE);
                                                                     Intent intent = new Intent(RegisterActivity.this, BlogActivity.class);
                                                                     startActivity(intent);
+                                                                    finish();
                                                                 }
                                                             }
                                                         });
@@ -157,11 +170,10 @@ public class RegisterActivity extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-
+                            Log.d(TAG, "onFailure: error " + e.getMessage());
                         }
                     });
         } else {
-            Toast.makeText(this, "Kindly fill all the fields.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -171,4 +183,65 @@ public class RegisterActivity extends AppCompatActivity {
         currentUser = firebaseAuth.getCurrentUser();
         firebaseAuth.addAuthStateListener(authStateListener);
     }
+
+    private boolean validateEmail() {
+
+        String emailInput = Objects.requireNonNull(emailEditText.getEditText()).getText().toString().trim();
+
+        if (emailInput.isEmpty()) {
+            emailEditText.setError("Field can't be empty");
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+            emailEditText.setError("Please enter a valid email address");
+            return false;
+        } else {
+            emailEditText.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validatePassword() {
+        String passwordInput = Objects.requireNonNull(passwordEditText.getEditText()).getText().toString().trim();
+
+        if (passwordInput.isEmpty()) {
+            passwordEditText.setError("Field can't be empty");
+            return false;
+        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
+            passwordEditText.setError("Password too weak");
+            return false;
+        } else {
+            passwordEditText.setError(null);
+            return true;
+        }
+
+    }
+
+    private boolean validateUsername() {
+
+        String usernameInput = Objects.requireNonNull(usernameEditText.getEditText()).getText().toString().trim();
+
+        if (usernameInput.isEmpty()) {
+            usernameEditText.setError("Field can't be empty");
+            return false;
+        } else if (usernameInput.length() > 15) {
+            usernameEditText.setError("Username too long");
+            return false;
+        } else {
+            usernameEditText.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validatePhone() {
+        String phone = phoneEditText.getEditText().getText().toString().trim();
+
+        if (phone.isEmpty()) {
+            phoneEditText.setError("Field can't be empty");
+            return false;
+        }
+        return true;
+    }
+
+
+
 }

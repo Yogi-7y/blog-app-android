@@ -123,7 +123,7 @@ public class HomeActivity extends AppCompatActivity {
                 // Take user to add blog
                 if (user != null && firebaseAuth != null) {
                     startActivity(new Intent(HomeActivity.this, BlogActivity.class));
-                    finish();
+
                 }
                 break;
 

@@ -113,14 +113,17 @@ public class LoginActivity extends AppCompatActivity {
                                         });
                                 
                             } else {
+                                Toast.makeText(LoginActivity.this, "Invalid login credentials", Toast.LENGTH_SHORT).show();
                                 Log.d(TAG, "onComplete: task failed" );
+                                progressBar.setVisibility(View.INVISIBLE);
                             }
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-
+                            Toast.makeText(LoginActivity.this, "Invalid login credentials", Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.INVISIBLE);
                         }
                     });
         } else {
