@@ -13,6 +13,7 @@
     <string name="add_blog">Add Blog</string>
     <string name="sign_out">Sign Out</string>
     <string name="categories_str">Select Categories</string>
+    <string name="search">Search</string>
 
     <string-array name="categories">
         <item>Finance</item>

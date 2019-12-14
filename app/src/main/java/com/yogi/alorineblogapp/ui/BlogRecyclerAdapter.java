@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,20 +23,22 @@ import com.yogi.alorineblogapp.BlogDetailActivity;
 import com.yogi.alorineblogapp.R;
 import com.yogi.alorineblogapp.model.Blog;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 
-public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapter.ViewHolder> {
+public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapter.ViewHolder> implements Filterable {
 
     private static final String TAG = BlogRecyclerAdapter.class.getSimpleName();
     private Context context;
     private List<Blog> blogList;
-    
+    private List<Blog> blogListFull;
 
     public BlogRecyclerAdapter(Context context, List<Blog> blogList) {
         this.context = context;
         this.blogList = blogList;
+        blogListFull = new ArrayList<>(blogList);
     }
 
     @NonNull
@@ -63,6 +67,8 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
                 .load(imageUrl)
                 .into(holder.imageView);
 
+        holder.category.setText(blog.getCategory());
+
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,8 +94,44 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
         return blogList.size();
     }
 
+    @Override
+    public Filter getFilter() {
+        return blogFilter;
+    }
+
+    private Filter blogFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Blog> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(blogListFull);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for(Blog blog : blogListFull) {
+                    if (blog.getCategory().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(blog);
+                    }
+                }
+            }
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            blogList.clear();
+            blogList.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, description, timeStamp, name;
+        public TextView title, description, timeStamp, name, category;
         public ImageView imageView;
         String userId, username;
         CardView parentLayout;
@@ -104,6 +146,7 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
             imageView = itemView.findViewById(R.id.blog_image_list);
             name = itemView.findViewById(R.id.hey);
             parentLayout = itemView.findViewById(R.id.parent_layout);
+            category = itemView.findViewById(R.id.blog_category_list);
 
         }
     }
