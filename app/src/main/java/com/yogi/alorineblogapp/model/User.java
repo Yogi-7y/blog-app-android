@@ -3,7 +3,9 @@ package com.yogi.alorineblogapp.model;
 
 import android.app.Application;
 
-public class User {
+import java.io.Serializable;
+
+public class User  {
 
     private String userId;
     private String username;

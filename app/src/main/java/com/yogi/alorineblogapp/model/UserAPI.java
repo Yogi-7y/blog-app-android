@@ -2,7 +2,9 @@ package com.yogi.alorineblogapp.model;
 
 import android.app.Application;
 
-public class UserAPI extends Application {
+import java.io.Serializable;
+
+public class UserAPI extends Application  {
 
     private String userId;
     private String username;

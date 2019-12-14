@@ -64,6 +64,33 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
+        collectionReference
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            for(QueryDocumentSnapshot blogs : queryDocumentSnapshots) {
+                                Blog blog = blogs.toObject(Blog.class);
+                                blogList.add(blog);
+                            }
+
+                            blogRecyclerAdapter = new BlogRecyclerAdapter(HomeActivity.this, blogList);
+                            recyclerView.setAdapter(blogRecyclerAdapter);
+                            blogRecyclerAdapter.notifyDataSetChanged();
+                        } else {
+                            Toast.makeText(HomeActivity.this, "No Blogs Available", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+
+
     }
 
     @Override
@@ -100,30 +127,30 @@ public class HomeActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        collectionReference
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if (!queryDocumentSnapshots.isEmpty()) {
-                            for(QueryDocumentSnapshot blogs : queryDocumentSnapshots) {
-                                Blog blog = blogs.toObject(Blog.class);
-                                blogList.add(blog);
-                            }
-
-                            blogRecyclerAdapter = new BlogRecyclerAdapter(HomeActivity.this, blogList);
-                            recyclerView.setAdapter(blogRecyclerAdapter);
-                            blogRecyclerAdapter.notifyDataSetChanged();
-                        } else {
-                            Toast.makeText(HomeActivity.this, "No Blogs Available", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                    }
-                });
+//        collectionReference
+//                .get()
+//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//                        if (!queryDocumentSnapshots.isEmpty()) {
+//                            for(QueryDocumentSnapshot blogs : queryDocumentSnapshots) {
+//                                Blog blog = blogs.toObject(Blog.class);
+//                                blogList.add(blog);
+//                            }
+//
+//                            blogRecyclerAdapter = new BlogRecyclerAdapter(HomeActivity.this, blogList);
+//                            recyclerView.setAdapter(blogRecyclerAdapter);
+//                            blogRecyclerAdapter.notifyDataSetChanged();
+//                        } else {
+//                            Toast.makeText(HomeActivity.this, "No Blogs Available", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//
+//                    }
+//                });
     }
 }

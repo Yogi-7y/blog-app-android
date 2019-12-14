@@ -1,9 +1,13 @@
 package com.yogi.alorineblogapp.model;
 
 
+import android.os.Parcelable;
+
 import com.google.firebase.Timestamp;
 
-public class Blog {
+import java.io.Serializable;
+
+public class Blog  {
     private String title;
     private String description;
     private String imageUri;

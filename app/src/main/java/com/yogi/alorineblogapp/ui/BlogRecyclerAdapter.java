@@ -1,6 +1,8 @@
 package com.yogi.alorineblogapp.ui;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,11 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.yogi.alorineblogapp.BlogDetailActivity;
 import com.yogi.alorineblogapp.R;
 import com.yogi.alorineblogapp.model.Blog;
 
@@ -25,6 +30,7 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
     private static final String TAG = BlogRecyclerAdapter.class.getSimpleName();
     private Context context;
     private List<Blog> blogList;
+    
 
     public BlogRecyclerAdapter(Context context, List<Blog> blogList) {
         this.context = context;
@@ -40,15 +46,15 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BlogRecyclerAdapter.ViewHolder holder, int position) {
-        Blog blog = blogList.get(position);
+    public void onBindViewHolder(@NonNull final BlogRecyclerAdapter.ViewHolder holder, final int position) {
+        final Blog blog = blogList.get(position);
         String imageUrl;
 
         holder.title.setText(blog.getTitle());
         holder.description.setText(blog.getDescription());
-//        holder.name.setText(blog.getUsername());
+        holder.name.setText(blog.getUsername());
 
-        String timeAgo = (String) DateUtils.getRelativeTimeSpanString(blog.getTimestamp().getSeconds() * 1000);
+        final String timeAgo = (String) DateUtils.getRelativeTimeSpanString(blog.getTimestamp().getSeconds() * 1000);
         holder.timeStamp.setText(timeAgo);
 
         imageUrl = blog.getImageUri();
@@ -56,6 +62,25 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
         Glide.with(context)
                 .load(imageUrl)
                 .into(holder.imageView);
+
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, BlogDetailActivity.class);
+                intent.putExtra("category", blogList.get(position).getCategory() );
+                intent.putExtra("description", blogList.get(position).getDescription() );
+                intent.putExtra("imageUri", blogList.get(position).getImageUri() );
+                intent.putExtra("timeStamp", timeAgo );
+                intent.putExtra("title", blogList.get(position).getTitle() );
+                intent.putExtra("userId", blogList.get(position).getUserId() );
+                intent.putExtra("username", blogList.get(position).getUsername() );
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+
+            }
+        });
+
+
     }
 
     @Override
@@ -67,6 +92,7 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
         public TextView title, description, timeStamp, name;
         public ImageView imageView;
         String userId, username;
+        CardView parentLayout;
 
         public ViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
@@ -76,6 +102,8 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
             description = itemView.findViewById(R.id.blog_description_list);
             timeStamp = itemView.findViewById(R.id.blog_time_stamp_list);
             imageView = itemView.findViewById(R.id.blog_image_list);
+            name = itemView.findViewById(R.id.hey);
+            parentLayout = itemView.findViewById(R.id.parent_layout);
 
         }
     }
